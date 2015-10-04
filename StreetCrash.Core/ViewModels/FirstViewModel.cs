@@ -1,8 +1,10 @@
-using System;
-using Cirrious.CrossCore;
-using Cirrious.MvvmCross.Plugins.Location;
 using Cirrious.MvvmCross.ViewModels;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace StreetCrash.Core.ViewModels
 {
@@ -18,7 +20,6 @@ namespace StreetCrash.Core.ViewModels
 
         public MvxCommand cadastroOcorrencias { get; set; }
         
-
         public FirstViewModel()
         {
 
@@ -27,8 +28,9 @@ namespace StreetCrash.Core.ViewModels
 
         private void ExecutarCadastrarOcorrencia()
         {
-            CadastrarOcorrencia cadOcorrencias = new CadastrarOcorrencia();
-            cadOcorrencias.Start();
+            ShowViewModel<CadastroOcorrenciaViewModel>();
+            //CadastrarOcorrencia cadOcorrencias = new CadastrarOcorrencia();
+            //cadOcorrencias.Start();
         }
         //public MvxCommand NaoResolvidoCommand { get; private set; }
 

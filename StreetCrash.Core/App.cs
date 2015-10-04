@@ -13,10 +13,11 @@ namespace StreetCrash.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
             
-            var cadastroOcorrencia = new CadastrarOcorrencia();
-            Mvx.RegisterSingleton(cadastroOcorrencia);
-            
+            //var cadastroOcorrencia = new cadastroOcorrenciaModel();
+            //Mvx.RegisterSingleton(cadastroOcorrencia);
+
             RegisterAppStart<ViewModels.FirstViewModel>();
+            //RegisterAppStart<ViewModels.cadastroOcorrenciaModel>();
         }
     }
 }

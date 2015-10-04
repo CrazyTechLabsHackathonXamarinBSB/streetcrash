@@ -20,7 +20,8 @@
             android:background="@android:color/holo_blue_dark"
             android:textStyle="italic"
             android:layout_width="363.5dp"
-            android:layout_height="match_parent"  android:layout_centerHorizontal ="true"/>
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -72,6 +73,5 @@
         android:src="@android:drawable/ic_dialog_map"
         local:MvxBind="Click cadastroOcorrencias"
         android:layout_width="373.0dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageButton1" />
+        android:layout_height="wrap_content" />
 </LinearLayout>
