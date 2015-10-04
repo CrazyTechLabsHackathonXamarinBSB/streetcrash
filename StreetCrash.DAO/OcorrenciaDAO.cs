@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StreetCrash.DAO
 {
-    public class OcorrenciaDAO
+    public class OcorrenciaDAO 
     {
         StreetCrashDataContext _context;
         public OcorrenciaDAO()

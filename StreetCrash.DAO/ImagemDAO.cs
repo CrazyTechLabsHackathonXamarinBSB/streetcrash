@@ -23,7 +23,7 @@ namespace StreetCrash.DAO
                 CODE_OCORRENCIA = model.Code_Ocorrencia,
                 IMAGEM1 = new System.Data.Linq.Binary(model.Imagem_Ocorrencia.ToArray()),
                 DESCRICAO = model.Descricao
-            });
+            }); 
             _context.SubmitChanges();
         }
     }
