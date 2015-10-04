@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StreetCrash.Model
 {
-   public class Comentarios
+   public class Comentario
     {
         public int Code { get; set; }
         public long Code_Ocorrencia { get; set; }

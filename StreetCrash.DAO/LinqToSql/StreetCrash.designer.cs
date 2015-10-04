@@ -30,18 +30,18 @@ namespace StreetCrash.DAO.LinqToSql
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertSTATUS(STATUS instance);
-    partial void UpdateSTATUS(STATUS instance);
-    partial void DeleteSTATUS(STATUS instance);
-    partial void InsertOCORRENCIA(OCORRENCIA instance);
-    partial void UpdateOCORRENCIA(OCORRENCIA instance);
-    partial void DeleteOCORRENCIA(OCORRENCIA instance);
-    partial void InsertIMAGEM(IMAGEM instance);
-    partial void UpdateIMAGEM(IMAGEM instance);
-    partial void DeleteIMAGEM(IMAGEM instance);
     partial void InsertCOMENTARIO(COMENTARIO instance);
     partial void UpdateCOMENTARIO(COMENTARIO instance);
     partial void DeleteCOMENTARIO(COMENTARIO instance);
+    partial void InsertIMAGEM(IMAGEM instance);
+    partial void UpdateIMAGEM(IMAGEM instance);
+    partial void DeleteIMAGEM(IMAGEM instance);
+    partial void InsertOCORRENCIA(OCORRENCIA instance);
+    partial void UpdateOCORRENCIA(OCORRENCIA instance);
+    partial void DeleteOCORRENCIA(OCORRENCIA instance);
+    partial void InsertSTATUS(STATUS instance);
+    partial void UpdateSTATUS(STATUS instance);
+    partial void DeleteSTATUS(STATUS instance);
     #endregion
 		
 		public StreetCrashDataContext() : 
@@ -74,19 +74,11 @@ namespace StreetCrash.DAO.LinqToSql
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<STATUS> STATUS
+		public System.Data.Linq.Table<COMENTARIO> COMENTARIOs
 		{
 			get
 			{
-				return this.GetTable<STATUS>();
-			}
-		}
-		
-		public System.Data.Linq.Table<OCORRENCIA> OCORRENCIAs
-		{
-			get
-			{
-				return this.GetTable<OCORRENCIA>();
+				return this.GetTable<COMENTARIO>();
 			}
 		}
 		
@@ -98,24 +90,36 @@ namespace StreetCrash.DAO.LinqToSql
 			}
 		}
 		
-		public System.Data.Linq.Table<COMENTARIO> COMENTARIOs
+		public System.Data.Linq.Table<OCORRENCIA> OCORRENCIAs
 		{
 			get
 			{
-				return this.GetTable<COMENTARIO>();
+				return this.GetTable<OCORRENCIA>();
+			}
+		}
+		
+		public System.Data.Linq.Table<STATUS> STATUS
+		{
+			get
+			{
+				return this.GetTable<STATUS>();
 			}
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.STATUS")]
-	public partial class STATUS : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.COMENTARIOS")]
+	public partial class COMENTARIO : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _CODE;
 		
+		private long _CODE_OCORRENCIA;
+		
 		private string _DESCRICAO;
+		
+		private EntityRef<OCORRENCIA> _OCORRENCIA;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -123,12 +127,15 @@ namespace StreetCrash.DAO.LinqToSql
     partial void OnCreated();
     partial void OnCODEChanging(int value);
     partial void OnCODEChanged();
+    partial void OnCODE_OCORRENCIAChanging(long value);
+    partial void OnCODE_OCORRENCIAChanged();
     partial void OnDESCRICAOChanging(string value);
     partial void OnDESCRICAOChanged();
     #endregion
 		
-		public STATUS()
+		public COMENTARIO()
 		{
+			this._OCORRENCIA = default(EntityRef<OCORRENCIA>);
 			OnCreated();
 		}
 		
@@ -152,7 +159,31 @@ namespace StreetCrash.DAO.LinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRICAO", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CODE_OCORRENCIA", DbType="BigInt NOT NULL")]
+		public long CODE_OCORRENCIA
+		{
+			get
+			{
+				return this._CODE_OCORRENCIA;
+			}
+			set
+			{
+				if ((this._CODE_OCORRENCIA != value))
+				{
+					if (this._OCORRENCIA.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCODE_OCORRENCIAChanging(value);
+					this.SendPropertyChanging();
+					this._CODE_OCORRENCIA = value;
+					this.SendPropertyChanged("CODE_OCORRENCIA");
+					this.OnCODE_OCORRENCIAChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRICAO", DbType="NVarChar(200)")]
 		public string DESCRICAO
 		{
 			get
@@ -168,6 +199,215 @@ namespace StreetCrash.DAO.LinqToSql
 					this._DESCRICAO = value;
 					this.SendPropertyChanged("DESCRICAO");
 					this.OnDESCRICAOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OCORRENCIA_COMENTARIO", Storage="_OCORRENCIA", ThisKey="CODE_OCORRENCIA", OtherKey="CODE", IsForeignKey=true)]
+		public OCORRENCIA OCORRENCIA
+		{
+			get
+			{
+				return this._OCORRENCIA.Entity;
+			}
+			set
+			{
+				OCORRENCIA previousValue = this._OCORRENCIA.Entity;
+				if (((previousValue != value) 
+							|| (this._OCORRENCIA.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OCORRENCIA.Entity = null;
+						previousValue.COMENTARIOs.Remove(this);
+					}
+					this._OCORRENCIA.Entity = value;
+					if ((value != null))
+					{
+						value.COMENTARIOs.Add(this);
+						this._CODE_OCORRENCIA = value.CODE;
+					}
+					else
+					{
+						this._CODE_OCORRENCIA = default(long);
+					}
+					this.SendPropertyChanged("OCORRENCIA");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.IMAGEM")]
+	public partial class IMAGEM : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _CODE;
+		
+		private long _CODE_OCORRENCIA;
+		
+		private System.Data.Linq.Binary _IMAGEM1;
+		
+		private string _DESCRICAO;
+		
+		private EntityRef<OCORRENCIA> _OCORRENCIA;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnCODEChanging(int value);
+    partial void OnCODEChanged();
+    partial void OnCODE_OCORRENCIAChanging(long value);
+    partial void OnCODE_OCORRENCIAChanged();
+    partial void OnIMAGEM1Changing(System.Data.Linq.Binary value);
+    partial void OnIMAGEM1Changed();
+    partial void OnDESCRICAOChanging(string value);
+    partial void OnDESCRICAOChanged();
+    #endregion
+		
+		public IMAGEM()
+		{
+			this._OCORRENCIA = default(EntityRef<OCORRENCIA>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CODE", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int CODE
+		{
+			get
+			{
+				return this._CODE;
+			}
+			set
+			{
+				if ((this._CODE != value))
+				{
+					this.OnCODEChanging(value);
+					this.SendPropertyChanging();
+					this._CODE = value;
+					this.SendPropertyChanged("CODE");
+					this.OnCODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CODE_OCORRENCIA", DbType="BigInt NOT NULL")]
+		public long CODE_OCORRENCIA
+		{
+			get
+			{
+				return this._CODE_OCORRENCIA;
+			}
+			set
+			{
+				if ((this._CODE_OCORRENCIA != value))
+				{
+					if (this._OCORRENCIA.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCODE_OCORRENCIAChanging(value);
+					this.SendPropertyChanging();
+					this._CODE_OCORRENCIA = value;
+					this.SendPropertyChanged("CODE_OCORRENCIA");
+					this.OnCODE_OCORRENCIAChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="IMAGEM", Storage="_IMAGEM1", DbType="Image NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary IMAGEM1
+		{
+			get
+			{
+				return this._IMAGEM1;
+			}
+			set
+			{
+				if ((this._IMAGEM1 != value))
+				{
+					this.OnIMAGEM1Changing(value);
+					this.SendPropertyChanging();
+					this._IMAGEM1 = value;
+					this.SendPropertyChanged("IMAGEM1");
+					this.OnIMAGEM1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRICAO", DbType="NVarChar(100)")]
+		public string DESCRICAO
+		{
+			get
+			{
+				return this._DESCRICAO;
+			}
+			set
+			{
+				if ((this._DESCRICAO != value))
+				{
+					this.OnDESCRICAOChanging(value);
+					this.SendPropertyChanging();
+					this._DESCRICAO = value;
+					this.SendPropertyChanged("DESCRICAO");
+					this.OnDESCRICAOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OCORRENCIA_IMAGEM", Storage="_OCORRENCIA", ThisKey="CODE_OCORRENCIA", OtherKey="CODE", IsForeignKey=true)]
+		public OCORRENCIA OCORRENCIA
+		{
+			get
+			{
+				return this._OCORRENCIA.Entity;
+			}
+			set
+			{
+				OCORRENCIA previousValue = this._OCORRENCIA.Entity;
+				if (((previousValue != value) 
+							|| (this._OCORRENCIA.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._OCORRENCIA.Entity = null;
+						previousValue.IMAGEMs.Remove(this);
+					}
+					this._OCORRENCIA.Entity = value;
+					if ((value != null))
+					{
+						value.IMAGEMs.Add(this);
+						this._CODE_OCORRENCIA = value.CODE;
+					}
+					else
+					{
+						this._CODE_OCORRENCIA = default(long);
+					}
+					this.SendPropertyChanged("OCORRENCIA");
 				}
 			}
 		}
@@ -199,7 +439,7 @@ namespace StreetCrash.DAO.LinqToSql
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _CODE;
+		private long _CODE;
 		
 		private System.Nullable<decimal> _LATITUDE;
 		
@@ -213,15 +453,21 @@ namespace StreetCrash.DAO.LinqToSql
 		
 		private string _OUTRO;
 		
-		private System.Nullable<short> _STATUS;
+		private System.Nullable<int> _CODE_STATUS;
 		
 		private bool _RESOLVIDO;
+		
+		private EntitySet<COMENTARIO> _COMENTARIOs;
+		
+		private EntitySet<IMAGEM> _IMAGEMs;
+		
+		private EntityRef<STATUS> _STATUS;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCODEChanging(int value);
+    partial void OnCODEChanging(long value);
     partial void OnCODEChanged();
     partial void OnLATITUDEChanging(System.Nullable<decimal> value);
     partial void OnLATITUDEChanged();
@@ -235,19 +481,22 @@ namespace StreetCrash.DAO.LinqToSql
     partial void OnCODE_CATEGORIAChanged();
     partial void OnOUTROChanging(string value);
     partial void OnOUTROChanged();
-    partial void OnSTATUSChanging(System.Nullable<short> value);
-    partial void OnSTATUSChanged();
+    partial void OnCODE_STATUSChanging(System.Nullable<int> value);
+    partial void OnCODE_STATUSChanged();
     partial void OnRESOLVIDOChanging(bool value);
     partial void OnRESOLVIDOChanged();
     #endregion
 		
 		public OCORRENCIA()
 		{
+			this._COMENTARIOs = new EntitySet<COMENTARIO>(new Action<COMENTARIO>(this.attach_COMENTARIOs), new Action<COMENTARIO>(this.detach_COMENTARIOs));
+			this._IMAGEMs = new EntitySet<IMAGEM>(new Action<IMAGEM>(this.attach_IMAGEMs), new Action<IMAGEM>(this.detach_IMAGEMs));
+			this._STATUS = default(EntityRef<STATUS>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CODE", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CODE
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CODE", AutoSync=AutoSync.OnInsert, DbType="BigInt NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public long CODE
 		{
 			get
 			{
@@ -386,22 +635,26 @@ namespace StreetCrash.DAO.LinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_STATUS", DbType="SmallInt")]
-		public System.Nullable<short> STATUS
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CODE_STATUS", DbType="Int")]
+		public System.Nullable<int> CODE_STATUS
 		{
 			get
 			{
-				return this._STATUS;
+				return this._CODE_STATUS;
 			}
 			set
 			{
-				if ((this._STATUS != value))
+				if ((this._CODE_STATUS != value))
 				{
-					this.OnSTATUSChanging(value);
+					if (this._STATUS.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCODE_STATUSChanging(value);
 					this.SendPropertyChanging();
-					this._STATUS = value;
-					this.SendPropertyChanged("STATUS");
-					this.OnSTATUSChanged();
+					this._CODE_STATUS = value;
+					this.SendPropertyChanged("CODE_STATUS");
+					this.OnCODE_STATUSChanged();
 				}
 			}
 		}
@@ -426,6 +679,66 @@ namespace StreetCrash.DAO.LinqToSql
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OCORRENCIA_COMENTARIO", Storage="_COMENTARIOs", ThisKey="CODE", OtherKey="CODE_OCORRENCIA")]
+		public EntitySet<COMENTARIO> COMENTARIOs
+		{
+			get
+			{
+				return this._COMENTARIOs;
+			}
+			set
+			{
+				this._COMENTARIOs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="OCORRENCIA_IMAGEM", Storage="_IMAGEMs", ThisKey="CODE", OtherKey="CODE_OCORRENCIA")]
+		public EntitySet<IMAGEM> IMAGEMs
+		{
+			get
+			{
+				return this._IMAGEMs;
+			}
+			set
+			{
+				this._IMAGEMs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="STATUS_OCORRENCIA", Storage="_STATUS", ThisKey="CODE_STATUS", OtherKey="CODE", IsForeignKey=true)]
+		public STATUS STATUS
+		{
+			get
+			{
+				return this._STATUS.Entity;
+			}
+			set
+			{
+				STATUS previousValue = this._STATUS.Entity;
+				if (((previousValue != value) 
+							|| (this._STATUS.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._STATUS.Entity = null;
+						previousValue.OCORRENCIAs.Remove(this);
+					}
+					this._STATUS.Entity = value;
+					if ((value != null))
+					{
+						value.OCORRENCIAs.Add(this);
+						this._CODE_STATUS = value.CODE;
+					}
+					else
+					{
+						this._CODE_STATUS = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("STATUS");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -445,21 +758,43 @@ namespace StreetCrash.DAO.LinqToSql
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
+		
+		private void attach_COMENTARIOs(COMENTARIO entity)
+		{
+			this.SendPropertyChanging();
+			entity.OCORRENCIA = this;
+		}
+		
+		private void detach_COMENTARIOs(COMENTARIO entity)
+		{
+			this.SendPropertyChanging();
+			entity.OCORRENCIA = null;
+		}
+		
+		private void attach_IMAGEMs(IMAGEM entity)
+		{
+			this.SendPropertyChanging();
+			entity.OCORRENCIA = this;
+		}
+		
+		private void detach_IMAGEMs(IMAGEM entity)
+		{
+			this.SendPropertyChanging();
+			entity.OCORRENCIA = null;
+		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.IMAGEM")]
-	public partial class IMAGEM : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.STATUS")]
+	public partial class STATUS : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _CODE;
 		
-		private long _CODE_OCORRENCIA;
-		
-		private System.Data.Linq.Binary _IMAGEM1;
-		
 		private string _DESCRICAO;
+		
+		private EntitySet<OCORRENCIA> _OCORRENCIAs;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -467,16 +802,13 @@ namespace StreetCrash.DAO.LinqToSql
     partial void OnCreated();
     partial void OnCODEChanging(int value);
     partial void OnCODEChanged();
-    partial void OnCODE_OCORRENCIAChanging(long value);
-    partial void OnCODE_OCORRENCIAChanged();
-    partial void OnIMAGEM1Changing(System.Data.Linq.Binary value);
-    partial void OnIMAGEM1Changed();
     partial void OnDESCRICAOChanging(string value);
     partial void OnDESCRICAOChanged();
     #endregion
 		
-		public IMAGEM()
+		public STATUS()
 		{
+			this._OCORRENCIAs = new EntitySet<OCORRENCIA>(new Action<OCORRENCIA>(this.attach_OCORRENCIAs), new Action<OCORRENCIA>(this.detach_OCORRENCIAs));
 			OnCreated();
 		}
 		
@@ -500,47 +832,7 @@ namespace StreetCrash.DAO.LinqToSql
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CODE_OCORRENCIA", DbType="BigInt NOT NULL")]
-		public long CODE_OCORRENCIA
-		{
-			get
-			{
-				return this._CODE_OCORRENCIA;
-			}
-			set
-			{
-				if ((this._CODE_OCORRENCIA != value))
-				{
-					this.OnCODE_OCORRENCIAChanging(value);
-					this.SendPropertyChanging();
-					this._CODE_OCORRENCIA = value;
-					this.SendPropertyChanged("CODE_OCORRENCIA");
-					this.OnCODE_OCORRENCIAChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="IMAGEM", Storage="_IMAGEM1", DbType="Image NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary IMAGEM1
-		{
-			get
-			{
-				return this._IMAGEM1;
-			}
-			set
-			{
-				if ((this._IMAGEM1 != value))
-				{
-					this.OnIMAGEM1Changing(value);
-					this.SendPropertyChanging();
-					this._IMAGEM1 = value;
-					this.SendPropertyChanged("IMAGEM1");
-					this.OnIMAGEM1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRICAO", DbType="NVarChar(100)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRICAO", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string DESCRICAO
 		{
 			get
@@ -557,6 +849,19 @@ namespace StreetCrash.DAO.LinqToSql
 					this.SendPropertyChanged("DESCRICAO");
 					this.OnDESCRICAOChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="STATUS_OCORRENCIA", Storage="_OCORRENCIAs", ThisKey="CODE", OtherKey="CODE_STATUS")]
+		public EntitySet<OCORRENCIA> OCORRENCIAs
+		{
+			get
+			{
+				return this._OCORRENCIAs;
+			}
+			set
+			{
+				this._OCORRENCIAs.Assign(value);
 			}
 		}
 		
@@ -579,115 +884,17 @@ namespace StreetCrash.DAO.LinqToSql
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.COMENTARIOS")]
-	public partial class COMENTARIO : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _CODE;
-		
-		private long _CODE_OCORRENCIA;
-		
-		private string _DESCRICAO;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnCODEChanging(int value);
-    partial void OnCODEChanged();
-    partial void OnCODE_OCORRENCIAChanging(long value);
-    partial void OnCODE_OCORRENCIAChanged();
-    partial void OnDESCRICAOChanging(string value);
-    partial void OnDESCRICAOChanged();
-    #endregion
-		
-		public COMENTARIO()
+		private void attach_OCORRENCIAs(OCORRENCIA entity)
 		{
-			OnCreated();
+			this.SendPropertyChanging();
+			entity.STATUS = this;
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CODE", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int CODE
+		private void detach_OCORRENCIAs(OCORRENCIA entity)
 		{
-			get
-			{
-				return this._CODE;
-			}
-			set
-			{
-				if ((this._CODE != value))
-				{
-					this.OnCODEChanging(value);
-					this.SendPropertyChanging();
-					this._CODE = value;
-					this.SendPropertyChanged("CODE");
-					this.OnCODEChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CODE_OCORRENCIA", DbType="BigInt NOT NULL")]
-		public long CODE_OCORRENCIA
-		{
-			get
-			{
-				return this._CODE_OCORRENCIA;
-			}
-			set
-			{
-				if ((this._CODE_OCORRENCIA != value))
-				{
-					this.OnCODE_OCORRENCIAChanging(value);
-					this.SendPropertyChanging();
-					this._CODE_OCORRENCIA = value;
-					this.SendPropertyChanged("CODE_OCORRENCIA");
-					this.OnCODE_OCORRENCIAChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRICAO", DbType="NVarChar(200)")]
-		public string DESCRICAO
-		{
-			get
-			{
-				return this._DESCRICAO;
-			}
-			set
-			{
-				if ((this._DESCRICAO != value))
-				{
-					this.OnDESCRICAOChanging(value);
-					this.SendPropertyChanging();
-					this._DESCRICAO = value;
-					this.SendPropertyChanged("DESCRICAO");
-					this.OnDESCRICAOChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			this.SendPropertyChanging();
+			entity.STATUS = null;
 		}
 	}
 }
