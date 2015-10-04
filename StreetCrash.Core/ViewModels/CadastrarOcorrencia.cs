@@ -6,29 +6,25 @@ using System.Diagnostics;
 
 namespace StreetCrash.Core.ViewModels
 {
-    public class FirstViewModel 
-		: MvxViewModel
+    public class CadastrarOcorrencia
+        : MvxViewModel
     {
-        private string _hello = "Hello MvvmCross";
-        public string Hello
+        public CadastrarOcorrencia()
         {
-            get { return _hello; }
-            set { _hello = value; RaisePropertyChanged(() => Hello); }
+            //var locationWatcher = Mvx.Resolve<IMvxLocationWatcher>();
+            //var options = new MvxLocationOptions();
+            //locationWatcher.Start(options,
+            //(location) =>
+            //{
+            //    //locationWatcher.Stop();
+            //    Debug.WriteLine(location.Coordinates.Latitude + " : " + location.Coordinates.Longitude);
+            //},
+            //(error) =>
+            //{
+            //    Debug.WriteLine(error.Code);
+            //});
         }
-
-        public MvxCommand cadastroOcorrencias { get; private set; }
         
-
-        public FirstViewModel()
-        {
-
-            cadastroOcorrencias = new MvxCommand(ExecutarCadastrarOcorrencia);
-        }
-
-        private void ExecutarCadastrarOcorrencia()
-        {
-            ShowViewModel<CadastrarOcorrencia>();
-        }
         //public MvxCommand NaoResolvidoCommand { get; private set; }
 
         //public MvxCommand ResolvidoCommand { get; private set; }

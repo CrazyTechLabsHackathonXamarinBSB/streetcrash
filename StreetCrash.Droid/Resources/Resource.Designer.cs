@@ -90,7 +90,10 @@ namespace StreetCrash.Droid
 			public const int Icon = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int splash = 2130837505;
+			public const int monoandroidsplash = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int splash = 2130837506;
 			
 			static Drawable()
 			{
@@ -156,6 +159,9 @@ namespace StreetCrash.Droid
 			// aapt resource value: 0x7f040010
 			public const int textView4 = 2130968592;
 			
+			// aapt resource value: 0x7f040011
+			public const int textView5 = 2130968593;
+			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -179,10 +185,7 @@ namespace StreetCrash.Droid
 			public const int listviewitem = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int Main = 2130903043;
-			
-			// aapt resource value: 0x7f030004
-			public const int SplashScreen = 2130903044;
+			public const int SplashScreen = 2130903043;
 			
 			static Layout()
 			{
@@ -215,6 +218,9 @@ namespace StreetCrash.Droid
 		
 		public partial class Style
 		{
+			
+			// aapt resource value: 0x7f050001
+			public const int Mono_Android_Theme_Splash = 2131034113;
 			
 			// aapt resource value: 0x7f050000
 			public const int Theme_Splash = 2131034112;
