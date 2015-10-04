@@ -144,6 +144,9 @@ namespace StreetCrash.Droid
 			// aapt resource value: 0x7f04000c
 			public const int linearLayout5 = 2130968588;
 			
+			// aapt resource value: 0x7f04000f
+			public const int myButton = 2130968591;
+			
 			// aapt resource value: 0x7f04000e
 			public const int spinner1 = 2130968590;
 			
@@ -153,14 +156,14 @@ namespace StreetCrash.Droid
 			// aapt resource value: 0x7f040008
 			public const int textView2 = 2130968584;
 			
-			// aapt resource value: 0x7f04000f
-			public const int textView3 = 2130968591;
-			
 			// aapt resource value: 0x7f040010
-			public const int textView4 = 2130968592;
+			public const int textView3 = 2130968592;
 			
 			// aapt resource value: 0x7f040011
-			public const int textView5 = 2130968593;
+			public const int textView4 = 2130968593;
+			
+			// aapt resource value: 0x7f040012
+			public const int textView5 = 2130968594;
 			
 			static Id()
 			{
@@ -179,13 +182,16 @@ namespace StreetCrash.Droid
 			public const int cadastroOcorrencia = 2130903040;
 			
 			// aapt resource value: 0x7f030001
-			public const int FirstView = 2130903041;
+			public const int camera = 2130903041;
 			
 			// aapt resource value: 0x7f030002
-			public const int listviewitem = 2130903042;
+			public const int FirstView = 2130903042;
 			
 			// aapt resource value: 0x7f030003
-			public const int SplashScreen = 2130903043;
+			public const int listviewitem = 2130903043;
+			
+			// aapt resource value: 0x7f030004
+			public const int SplashScreen = 2130903044;
 			
 			static Layout()
 			{
@@ -205,6 +211,9 @@ namespace StreetCrash.Droid
 			
 			// aapt resource value: 0x7f060000
 			public const int Hello = 2131099648;
+			
+			// aapt resource value: 0x7f060002
+			public const int openCamera = 2131099650;
 			
 			static String()
 			{

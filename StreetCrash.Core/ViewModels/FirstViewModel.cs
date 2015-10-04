@@ -16,7 +16,7 @@ namespace StreetCrash.Core.ViewModels
             set { _hello = value; RaisePropertyChanged(() => Hello); }
         }
 
-        public MvxCommand cadastroOcorrencias { get; private set; }
+        public MvxCommand cadastroOcorrencias { get; set; }
         
 
         public FirstViewModel()
@@ -27,7 +27,8 @@ namespace StreetCrash.Core.ViewModels
 
         private void ExecutarCadastrarOcorrencia()
         {
-            ShowViewModel<CadastrarOcorrencia>();
+            CadastrarOcorrencia cadOcorrencias = new CadastrarOcorrencia();
+            cadOcorrencias.Start();
         }
         //public MvxCommand NaoResolvidoCommand { get; private set; }
 
