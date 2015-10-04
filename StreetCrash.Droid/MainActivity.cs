@@ -5,6 +5,12 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Android.Locations;
+using Androind.Util;
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace StreetCrash.Droid
 {
@@ -12,6 +18,7 @@ namespace StreetCrash.Droid
     public class MainActivity : Activity
     {
         int count = 1;
+        TextView enderecoText;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -25,6 +32,12 @@ namespace StreetCrash.Droid
             Button button = FindViewById<Button>(Resource.Id.MyButton);
 
             button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+
+            SetContentView(Resource.Layout.cadastroOcorrencia);
+
+            button imageButton1 = FindViewById<Button>(Resource.Id.MyButton);
+            imageButton1.Click += delegate { enderecoText.Text = string.Format("{0} clicks!", count++); };
+
         }
     }
 }
