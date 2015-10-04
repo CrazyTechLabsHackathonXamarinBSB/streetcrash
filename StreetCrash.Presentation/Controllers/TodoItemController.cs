@@ -6,6 +6,9 @@ using System.Web.Http.OData;
 using Microsoft.WindowsAzure.Mobile.Service;
 using StreetCrash.Presentation.DataObjects;
 using StreetCrash.Presentation.Models;
+using StreetCrash.Service;
+using StreetCrash.Model;
+using System.Collections.Generic;
 
 namespace StreetCrash.Presentation.Controllers
 {

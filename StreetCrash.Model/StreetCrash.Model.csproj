@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categoria.cs" />
     <Compile Include="Comentario.cs" />
     <Compile Include="Imagem.cs" />
     <Compile Include="Ocorrencia.cs" />
