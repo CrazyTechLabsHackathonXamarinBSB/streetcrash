@@ -22,6 +22,7 @@
             p1:src="@android:drawable/ic_input_add"
             p1:layout_width="73.9dp"
             p1:layout_height="match_parent"
+            local:MvxBind="Click carregarImage"
             p1:layout_marginRight="0.0dp"
             p1:background="@android:color/holo_blue_dark" />
     </LinearLayout>

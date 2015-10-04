@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Cirrious.CrossCore;
 
 namespace StreetCrash.Core.ViewModels
 {
@@ -18,8 +19,10 @@ namespace StreetCrash.Core.ViewModels
             set { _hello = value; RaisePropertyChanged(() => Hello); }
         }
 
+        
         public MvxCommand cadastroOcorrencias { get; set; }
         
+
         public FirstViewModel()
         {
 
@@ -29,35 +32,7 @@ namespace StreetCrash.Core.ViewModels
         private void ExecutarCadastrarOcorrencia()
         {
             ShowViewModel<CadastroOcorrenciaViewModel>();
-            //CadastrarOcorrencia cadOcorrencias = new CadastrarOcorrencia();
-            //cadOcorrencias.Start();
         }
-        //public MvxCommand NaoResolvidoCommand { get; private set; }
-
-        //public MvxCommand ResolvidoCommand { get; private set; }
-
-        //public MvxCommand InserirComentarioCommand { get; private set; }
-
-        //public FirstViewModel()
-        //{
-        //    NaoResolvidoCommand = new MvxCommand(ExecuteNaoResolvidoCommand);
-        //    ResolvidoCommand = new MvxCommand(ExecuteResolvidoCommand);
-        //    InserirComentarioCommand = new MvxCommand(ExecuteInserirComentarioCommand);
-        //}
-
-        //private void ExecuteNaoResolvidoCommand()
-        //{
-        //    //Lógica  
-        //}
-
-        //private void ExecuteResolvidoCommand()
-        //{
-        //    //marcar como resolvido
-        //}
-
-        //private void ExecuteInserirComentarioCommand()
-        //{
-
-        //}
+        
     }
 }

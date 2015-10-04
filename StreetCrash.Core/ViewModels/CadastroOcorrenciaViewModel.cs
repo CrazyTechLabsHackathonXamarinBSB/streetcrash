@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using StreetCrash.Core;
 using System.Net;
+using System.IO;
+using Cirrious.MvvmCross.Plugins.PictureChooser;
 
 namespace StreetCrash.Core.ViewModels
 {
@@ -23,9 +25,18 @@ namespace StreetCrash.Core.ViewModels
             get { return _hello; }
             set { _hello = value; RaisePropertyChanged(() => Hello); }
         }
-        
+        private string _imagem = "";
+        public string Imagem
+        {
+            get { return _imagem; }
+            set { _imagem = value; RaisePropertyChanged(() => Imagem); }
+        }
+        public MvxCommand carregarImage { get; set; }
+
         public CadastroOcorrenciaViewModel()
         {
+
+            carregarImage = new MvxCommand(ExecutarCarregamentoImagem);
 
             var locationWatcher = Mvx.Resolve<IMvxLocationWatcher>();
             var options = new MvxLocationOptions
@@ -53,6 +64,24 @@ namespace StreetCrash.Core.ViewModels
             
              //locationWatcher.CurrentLocation.Timestamp.DateTime - DateTime.Now;
         }
-       
+        private void ExecutarCarregamentoImagem()
+        {
+
+            var carregarImagem = Mvx.Resolve<IMvxPictureChooserTask>();
+
+            carregarImagem.ChoosePictureFromLibrary(400, 95, OnPicture, () => { });
+
+        }
+        public string _bytes;
+        public byte[] Bytes;
+        private void OnPicture(Stream pictureStream)
+        {
+            var memoryStream = new MemoryStream();
+            pictureStream.CopyTo(memoryStream);
+            Bytes = memoryStream.ToArray();
+            Imagem = Bytes.ToString();
+        }
+
+
     }
 }
