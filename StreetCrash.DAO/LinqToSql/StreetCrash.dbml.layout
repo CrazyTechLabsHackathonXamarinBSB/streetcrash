@@ -2,49 +2,62 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="StreetCrash">
   <DataContextMoniker Name="/StreetCrashDataContext" />
   <nestedChildShapes>
-    <classShape Id="ecf3b539-c9f8-4c3f-bca3-53dfbce3c0f7" absoluteBounds="6.25, 1, 2, 1.3862939453125003">
+    <classShape Id="0b95bf3d-b03c-456c-a43e-d3f948adc4fc" absoluteBounds="0.75, 2.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/StreetCrashDataContext/CATEGORIA" />
+      <nestedChildShapes>
+        <elementListCompartment Id="301138c9-3f37-4343-a94d-696f6bfd79eb" absoluteBounds="0.765, 3.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="664d85f0-6c0c-496f-88a3-4ae84e91d13e" absoluteBounds="6.25, 1.25, 2, 1.5785953776041666">
       <DataClassMoniker Name="/StreetCrashDataContext/COMENTARIO" />
       <nestedChildShapes>
-        <elementListCompartment Id="089e7965-f483-4fb8-a84f-cf60a13bc71c" absoluteBounds="6.265, 1.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5eba72bf-4e45-4964-8df0-bb2f2747368a" absoluteBounds="6.265, 1.71, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="77f486e6-9610-43d9-bbb0-1250c9042239" absoluteBounds="6.25, 3.125, 2, 1.5785953776041666">
+    <classShape Id="305f66ae-8b62-43a0-a36c-48638dada1f2" absoluteBounds="6.25, 3.625, 2, 1.7708968098958322">
       <DataClassMoniker Name="/StreetCrashDataContext/IMAGEM" />
       <nestedChildShapes>
-        <elementListCompartment Id="2cd38974-f1d8-43e2-beb2-2ac1c3eed1ab" absoluteBounds="6.265, 3.585, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="9d19c745-704d-47cb-b61a-1f064a342bbf" absoluteBounds="6.265, 4.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="59ce512b-c510-463f-8933-2b1fb2718ba7" absoluteBounds="3.5, 1.625, 2, 2.5401025390625005">
-      <DataClassMoniker Name="/StreetCrashDataContext/OCORRENCIA" />
-      <nestedChildShapes>
-        <elementListCompartment Id="94d1b892-40a3-457f-b0dc-b3bb49dbb5a0" absoluteBounds="3.515, 2.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="86256e8a-80f7-4fdc-b5ba-fd30a813b81d" absoluteBounds="0.75, 2.25, 2, 1.1939925130208335">
+    <classShape Id="23eb29ac-5aa1-47b3-a1b6-5cf7ef045966" absoluteBounds="0.75, 0.75, 2, 1.1939925130208335">
       <DataClassMoniker Name="/StreetCrashDataContext/STATUS" />
       <nestedChildShapes>
-        <elementListCompartment Id="3fba9f3f-7ef6-4fbd-a334-3f3a87c2df03" absoluteBounds="0.765, 2.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ff045b81-c90b-4fb0-8e00-fde6187e695f" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(5.5 : 2.00564697265625); (6.25 : 2.00564697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <classShape Id="ca749499-3545-4249-ad1e-4887663867a3" absoluteBounds="4, 2.625, 2, 2.5401025390625">
+      <DataClassMoniker Name="/StreetCrashDataContext/OCORRENCIA" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2b095119-6744-4ae2-889b-010e8c98102f" absoluteBounds="4.015, 3.085, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5 : 2.625); (5 : 1.9374995); (6.25 : 1.9374995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/StreetCrashDataContext/OCORRENCIA/OCORRENCIA_COMENTARIO" />
       <nodes>
-        <classShapeMoniker Id="59ce512b-c510-463f-8933-2b1fb2718ba7" />
-        <classShapeMoniker Id="ecf3b539-c9f8-4c3f-bca3-53dfbce3c0f7" />
+        <classShapeMoniker Id="ca749499-3545-4249-ad1e-4887663867a3" />
+        <classShapeMoniker Id="664d85f0-6c0c-496f-88a3-4ae84e91d13e" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 3.64505126953125); (6.25 : 3.64505126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(6 : 4.39505126953125); (6.25 : 4.39505126953125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/StreetCrashDataContext/OCORRENCIA/OCORRENCIA_IMAGEM" />
       <nodes>
-        <classShapeMoniker Id="59ce512b-c510-463f-8933-2b1fb2718ba7" />
-        <classShapeMoniker Id="77f486e6-9610-43d9-bbb0-1250c9042239" />
+        <classShapeMoniker Id="ca749499-3545-4249-ad1e-4887663867a3" />
+        <classShapeMoniker Id="305f66ae-8b62-43a0-a36c-48638dada1f2" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 2.84699625651042); (3.5 : 2.84699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 1.34374975); (4.4687475 : 1.34374975); (4.4687475 : 2.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/StreetCrashDataContext/STATUS/STATUS_OCORRENCIA" />
       <nodes>
-        <classShapeMoniker Id="86256e8a-80f7-4fdc-b5ba-fd30a813b81d" />
-        <classShapeMoniker Id="59ce512b-c510-463f-8933-2b1fb2718ba7" />
+        <classShapeMoniker Id="23eb29ac-5aa1-47b3-a1b6-5cf7ef045966" />
+        <classShapeMoniker Id="ca749499-3545-4249-ad1e-4887663867a3" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.34699625651042); (4 : 3.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/StreetCrashDataContext/CATEGORIA/CATEGORIA_OCORRENCIA" />
+      <nodes>
+        <classShapeMoniker Id="0b95bf3d-b03c-456c-a43e-d3f948adc4fc" />
+        <classShapeMoniker Id="ca749499-3545-4249-ad1e-4887663867a3" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

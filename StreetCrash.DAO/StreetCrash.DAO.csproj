@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoriaDAO.cs" />
     <Compile Include="ComentarioDAO.cs" />
     <Compile Include="ImagemDAO.cs" />
     <Compile Include="LinqToSql\StreetCrash.designer.cs">
@@ -55,6 +57,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="StatusDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StreetCrash.Model\StreetCrash.Model.csproj">
