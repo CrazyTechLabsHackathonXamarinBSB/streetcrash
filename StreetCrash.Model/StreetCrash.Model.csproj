@@ -40,9 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Comentarios.cs" />
+    <Compile Include="Comentario.cs" />
     <Compile Include="Imagem.cs" />
-    <Compile Include="Ocorrencias.cs" />
+    <Compile Include="Ocorrencia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status.cs" />
   </ItemGroup>

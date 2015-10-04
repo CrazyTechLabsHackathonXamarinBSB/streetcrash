@@ -10,7 +10,7 @@ namespace StreetCrash.Model
     {
         public int Code { get; set; }
         public long Code_Ocorrencia { get; set; }
-        public int Imagem_Ocorrencia { get; set; }
+        public byte[] Imagem_Ocorrencia { get; set; }
         public string Descricao { get; set; }
     }
 }

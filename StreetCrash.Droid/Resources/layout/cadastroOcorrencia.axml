@@ -17,9 +17,7 @@
             p1:layout_height="match_parent"
             p1:id="@+id/textView1"
             p1:layout_marginRight="2.4dp"
-            p1:background="@android:color/holo_blue_dark"
-            p1:textAlignment="textStart"
-            p1:textDirection="@android:integer/status_bar_notification_info_maxnum" />
+            p1:background="@android:color/holo_blue_dark" />
         <ImageButton
             p1:src="@android:drawable/ic_input_add"
             p1:layout_width="73.9dp"

@@ -1,22 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="streetcrash_db" Class="StreetCrashDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=rngtnpa791.database.windows.net,1433;Initial Catalog=streetcrash_db;Persist Security Info=True;User ID=streetcrash" SettingsObjectName="StreetCrash.DAO.Properties.Settings" SettingsPropertyName="streetcrash_dbConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.STATUS" Member="STATUS">
-    <Type Name="STATUS">
+  <Table Name="dbo.COMENTARIOS" Member="COMENTARIOs">
+    <Type Name="COMENTARIO">
       <Column Name="CODE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DESCRICAO" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
-  <Table Name="dbo.OCORRENCIA" Member="OCORRENCIAs">
-    <Type Name="OCORRENCIA">
-      <Column Name="CODE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="LATITUDE" Type="System.Decimal" DbType="Decimal(15,15)" CanBeNull="true" />
-      <Column Name="LONGITUDE" Type="System.Decimal" DbType="Decimal(15,15)" CanBeNull="true" />
-      <Column Name="ENDERECO" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="DATA_CADASTRO" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="CODE_CATEGORIA" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="OUTRO" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="STATUS" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-      <Column Name="RESOLVIDO" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CODE_OCORRENCIA" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="DESCRICAO" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Association Name="OCORRENCIA_COMENTARIO" Member="OCORRENCIA" ThisKey="CODE_OCORRENCIA" OtherKey="CODE" Type="OCORRENCIA" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.IMAGEM" Member="IMAGEMs">
@@ -25,13 +14,30 @@
       <Column Name="CODE_OCORRENCIA" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
       <Column Name="IMAGEM" Member="IMAGEM1" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="DESCRICAO" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="OCORRENCIA_IMAGEM" Member="OCORRENCIA" ThisKey="CODE_OCORRENCIA" OtherKey="CODE" Type="OCORRENCIA" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.COMENTARIOS" Member="COMENTARIOs">
-    <Type Name="COMENTARIO">
+  <Table Name="dbo.OCORRENCIA" Member="OCORRENCIAs">
+    <Type Name="OCORRENCIA">
+      <Column Name="CODE" Type="System.Int64" DbType="BigInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LATITUDE" Type="System.Decimal" DbType="Decimal(15,15)" CanBeNull="true" />
+      <Column Name="LONGITUDE" Type="System.Decimal" DbType="Decimal(15,15)" CanBeNull="true" />
+      <Column Name="ENDERECO" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DATA_CADASTRO" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="CODE_CATEGORIA" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="OUTRO" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="CODE_STATUS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RESOLVIDO" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="OCORRENCIA_COMENTARIO" Member="COMENTARIOs" ThisKey="CODE" OtherKey="CODE_OCORRENCIA" Type="COMENTARIO" />
+      <Association Name="OCORRENCIA_IMAGEM" Member="IMAGEMs" ThisKey="CODE" OtherKey="CODE_OCORRENCIA" Type="IMAGEM" />
+      <Association Name="STATUS_OCORRENCIA" Member="STATUS" ThisKey="CODE_STATUS" OtherKey="CODE" Type="STATUS" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.STATUS" Member="STATUS">
+    <Type Name="STATUS">
       <Column Name="CODE" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="CODE_OCORRENCIA" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
-      <Column Name="DESCRICAO" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="DESCRICAO" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="STATUS_OCORRENCIA" Member="OCORRENCIAs" ThisKey="CODE" OtherKey="CODE_STATUS" Type="OCORRENCIA" />
     </Type>
   </Table>
 </Database>

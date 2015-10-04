@@ -6,7 +6,6 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Android.Locations;
-using Androind.Util;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -29,14 +28,14 @@ namespace StreetCrash.Droid
 
             // Get our button from the layout resource,
             // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
+            //Button button = FindViewById<Button>(Resource.Id.MyButton);
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            //button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
 
-            SetContentView(Resource.Layout.cadastroOcorrencia);
+            //SetContentView(Resource.Layout.cadastroOcorrencia);
 
-            button imageButton1 = FindViewById<Button>(Resource.Id.MyButton);
-            imageButton1.Click += delegate { enderecoText.Text = string.Format("{0} clicks!", count++); };
+            //button imageButton1 = FindViewById<Button>(Resource.Id.MyButton);
+            //imageButton1.Click += delegate { enderecoText.Text = string.Format("{0} clicks!", count++); };
 
         }
     }
